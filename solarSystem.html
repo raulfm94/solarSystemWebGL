@@ -1,0 +1,104 @@
+<html>
+	<head>
+	<meta charset="utf8">
+	<title>Solar System</title>
+	<style>
+			body {
+				background: black;
+			}
+		</style>
+	<script src="three.min.js"></script>
+	<!-- <script src="CanvasRenderer.js"></script> -->
+	</head>
+	<body>
+		<script>
+			var scene, camera, render;
+			var sun, earth;
+			var t = 0;
+			var y = 0;
+
+			init();
+			animate();
+
+			function init() {
+
+				camera = new THREE.PerspectiveCamera(45,window.innerWidth / window.innerHeight,1,1000000);
+				camera.position.z = 6300;
+
+				scene = new THREE.Scene();
+
+
+				// Code....
+				// Sun
+				var sun_geom, sun_mat;
+				sun_geom = new THREE.SphereGeometry(830,30,30);
+				sun_mat = new THREE.MeshBasicMaterial( {color: 0xffff00});
+				sun = new THREE.Mesh(sun_geom,sun_mat);
+				scene.add(sun);
+
+				// Earth
+				var earth_geom, earth_mat;
+				earth_geom = new THREE.SphereGeometry(50,20,20);
+				earth_mat = new THREE.MeshBasicMaterial( {color: 0xffff00});
+				earth = new THREE.Mesh(earth_geom,earth_mat);
+				earth.position.x = 1500;
+				scene.add(earth);
+
+				// Stars
+				var starsGeometry = new THREE.Geometry();
+				var starsMaterial = new THREE.PointsMaterial({color:0xe6e6fa,size:1,sizeAttenuation:false});
+				var stars;
+
+				for(var i=0; i<5000; i++) {
+					var vertex = new THREE.Vector3();
+					vertex.x = Math.random()*2-1;
+					vertex.y = Math.random()*2-1;
+					vertex.z = Math.random()*2-1;
+					vertex.multiplyScalar(6000);
+					starsGeometry.vertices.push(vertex);
+				}
+
+				stars = new THREE.Points(starsGeometry,starsMaterial);
+				stars.scale.set(50,50,50);
+				scene.add(stars);
+
+
+				render = new THREE.WebGLRenderer();
+				render.setPixelRatio(window.devicePixelRatio);
+				render.setSize(window.innerWidth, window.innerHeight);
+				document.body.appendChild(render.domElement);
+
+				window.addEventListener('resize', onWindowResize, false);
+				document.addEventListener('mousemove', function (event) {
+					y = parseInt(event.offsetY);
+				});
+			}
+
+			function onWindowResize(){
+
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+
+				render.setSize(window.innerWidth, window.innerHeight);
+			}
+
+			function animate(){
+
+				requestAnimationFrame(animate);
+				sun.rotation.y += 0.005;
+				earth.position.x = Math.sin(t*0.1)*1500;
+				earth.position.z = Math.cos(t*0.1)*1500;
+
+				t += Math.PI/180*2;
+
+				camera.position.y = y*5;
+
+				camera.lookAt(scene.position);
+
+				render.render(scene,camera);
+			}
+
+		</script>
+	</body>
+</html>
+
