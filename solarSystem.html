@@ -30,24 +30,55 @@
 
 
 				// Code....
-				// Sun
-				var sun_geom, sun_mat;
-				sun_geom = new THREE.SphereGeometry(2030,80,80);
-				var texture = THREE.ImageUtils.loadTexture('sun2.png');
-				texture.anisotropy = 8;
-				sun_mat = new THREE.MeshPhongMaterial( {map: texture, emissive: 0xffffff});
-				sun = new THREE.Mesh(sun_geom,sun_mat);
-				scene.add(sun);
+				// Texture solution
+				var loader = new THREE.TextureLoader();
+				loader.load( 'sun2.png', function (texture) {
 
-				// Earth
-				var earth_geom, earth_mat;
-				earth_geom = new THREE.SphereGeometry(50,20,20);
-				var texture2 = THREE.ImageUtils.loadTexture('earth.jpg');
-				texture2.anisotropy = 8;
-				earth_mat = new THREE.MeshPhongMaterial( {map: texture2, emissive: 0xffffff});
-				earth = new THREE.Mesh(earth_geom,earth_mat);
-				//earth.position.x = 1500;
-				scene.add(earth);
+					// Sun
+					var sun_geom, sun_mat;
+					sun_geom = new THREE.SphereGeometry(2030,80,80);
+					
+					// var texture = THREE.TextureLoader( 'sun2.png' );
+					//texture.anisotropy = 8;
+					sun_mat = new THREE.MeshBasicMaterial( { map: texture, overdraw: 0.5 });
+					sun = new THREE.Mesh(sun_geom,sun_mat);
+					scene.add(sun);					
+
+				} );
+
+				loader.load( 'earth.jpg', function (texture2) {
+				
+					// Earth
+					var earth_geom, earth_mat;
+					earth_geom = new THREE.SphereGeometry(50,20,20);
+					
+					//var texture2 = THREE.TextureLoader('earth.jpg');
+					//texture2.anisotropy = 8;
+					earth_mat = new THREE.MeshBasicMaterial( {map: texture2, overdraw: 0.5 });
+					earth = new THREE.Mesh(earth_geom,earth_mat);
+					//earth.position.x = 1500;
+					scene.add(earth);
+
+				} );
+
+				// // Sun
+				// var sun_geom, sun_mat;
+				// sun_geom = new THREE.SphereGeometry(2030,80,80);
+				// var texture = THREE.TextureLoader( 'sun2.png' );
+				// //texture.anisotropy = 8;
+				// sun_mat = new THREE.MeshBasicMaterial( {map: texture});
+				// sun = new THREE.Mesh(sun_geom,sun_mat);
+				// scene.add(sun);
+
+				// // Earth
+				// var earth_geom, earth_mat;
+				// earth_geom = new THREE.SphereGeometry(50,20,20);
+				// var texture2 = THREE.TextureLoader('earth.jpg');
+				// //texture2.anisotropy = 8;
+				// earth_mat = new THREE.MeshBasicMaterial( {map: texture2});
+				// earth = new THREE.Mesh(earth_geom,earth_mat);
+				// //earth.position.x = 1500;
+				// scene.add(earth);
 
 				// Stars
 				var starsGeometry = new THREE.Geometry();
@@ -113,12 +144,14 @@
 				requestAnimationFrame(animate);
 
 				sun.rotation.y += 0.005;
+				earth.rotation.y -= 0.01;
 				earth.position.x = Math.sin(t*0.1)*7500;
 				earth.position.z = Math.cos(t*0.1)*7500;
 
 				t += Math.PI/180*2;
 
-				camera.position.z -= 100;
+				camera.position.z = earth.position.z + 1000;
+				camera.position.x = earth.position.x + 1000;
 
 				camera.lookAt(earth.position);
 
