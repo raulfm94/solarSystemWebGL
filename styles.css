@@ -1,0 +1,23 @@
+nav{
+  background: #000000;
+  color: white;
+  max-width: 100%;
+}
+.icon{
+  text-align: center;
+  padding: 5px;
+  cursor: pointer;
+}
+.icon.mercury img{
+  width: 37px;
+}
+.icon.min img{
+  max-width: 42px;
+}
+.icon img{
+  width: 55px;
+}
+.text{
+  margin-top: 5px;
+  display: block;
+}
