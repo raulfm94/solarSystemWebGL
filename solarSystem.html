@@ -14,7 +14,7 @@
 	<body>
 		<script>
 			var scene, camera, render;
-			var sun, earth;
+			var sun, mercury, venus, earth, mars, jupiter, saturn;
 			var t = 0;
 			var y = 0;
 
@@ -24,7 +24,7 @@
 			function init() {
 
 				camera = new THREE.PerspectiveCamera(45,window.innerWidth / window.innerHeight,1,1000000);
-				camera.position.z = 39300;
+				camera.position.z = 45000;
 
 				scene = new THREE.Scene();
 
@@ -36,33 +36,45 @@
 
 					// Sun
 					var sun_geom, sun_mat;
-					sun_geom = new THREE.SphereGeometry(2030,80,80);
+					sun_geom = new THREE.SphereGeometry(2300,80,80);
 					
 					// var texture = THREE.TextureLoader( 'sun2.png' );
 					//texture.anisotropy = 8;
-					sun_mat = new THREE.MeshBasicMaterial( { map: texture, overdraw: 0.5 });
+					sun_mat = new THREE.MeshBasicMaterial( { map: texture});
 					sun = new THREE.Mesh(sun_geom,sun_mat);
 					scene.add(sun);					
 
 				} );
 
-				// Mercury
-				var mercury, mercury_geom, mercury_mat;
-				mercury_geom = new THREE.SphereGeometry(60,20,20);
-				var mercury_texture = THREE.TextureLoader().load('img/mercurymap.jpg')
+				// Earth
+				loader.load( 'img/mercurymap.jpg', function (mercury_texture) {
 
-				mercury_mat = new THREE.MeshBasicMaterial( {map: mercury_texture});
-				mercury = new THREE.Mesh(mercury_geom, mercury_mat);
-				scene.add(mercury);
+					// Mercury
+					var mercury_geom, mercury_mat;
+					mercury_geom = new THREE.SphereGeometry(60,20,20);
+					
+					//var mercury_texture = THREE.TextureLoader().load('img/mercurymap.jpg')
 
-				// Venus
-				var venus, venus_geom, venus_mat;
-				mercury_venus = new THREE.SphereGeometry(90,20,20);
-				var venus_texture = THREE.TextureLoader().load('img/venusmap.jpg')
+					mercury_mat = new THREE.MeshBasicMaterial( {map: mercury_texture});
+					mercury = new THREE.Mesh(mercury_geom, mercury_mat);
+					scene.add(mercury);
 
-				venus_mat = new THREE.MeshBasicMaterial( {map: venus_texture});
-				venus = new THREE.Mesh(venus_geom, venus_mat);
-				scene.add(venus);
+				} );
+
+				loader.load( 'img/venusmap.jpg', function (venus_texture) {
+
+					// Venus
+					var venus_geom, venus_mat;
+					venus_geom = new THREE.SphereGeometry(90,20,20);
+
+					//var venus_texture = THREE.TextureLoader().load('img/venusmap.jpg')
+
+					venus_mat = new THREE.MeshBasicMaterial( {map: venus_texture});
+					venus = new THREE.Mesh(venus_geom, venus_mat);
+					scene.add(venus);
+
+				} );
+
 
 				// Earth
 				loader.load( 'earth.jpg', function (texture2) {
@@ -73,39 +85,57 @@
 					
 					//var texture2 = THREE.TextureLoader('earth.jpg');
 					//texture2.anisotropy = 8;
-					earth_mat = new THREE.MeshBasicMaterial( {map: texture2, overdraw: 0.5 });
+					earth_mat = new THREE.MeshBasicMaterial( {map: texture2});
 					earth = new THREE.Mesh(earth_geom,earth_mat);
 					//earth.position.x = 1500;
 					scene.add(earth);
 
 				} );
 
-				// Mars
-				var mars, mars_geom, mars_mat;
-				mars_geom = new THREE.SphereGeometry(80,20,20);
-				var mars_texture = THREE.TextureLoader().load('img/marsmap.jpg')
+			
+				loader.load( 'img/marsmap.jpg', function (mars_texture) {
 
-				mars_mat = new THREE.MeshBasicMaterial( {map: mars_texture});
-				mars = new THREE.Mesh(mars_geom, mars_mat);
-				scene.add(mars);
+					// Mars
+					var mars_geom, mars_mat;
+					mars_geom = new THREE.SphereGeometry(80,20,20);
+					
+					//var mars_texture = THREE.TextureLoader().load('img/marsmap.jpg')
 
-				//Jupiter
-				var jupiter, jupiter_geom, jupiter_mat;
-				jupiter_geom = new THREE.SphereGeometry(350,50,50);
-				var jupiter_texture = THREE.TextureLoader().load('img/jupitermap.jpg')
+					mars_mat = new THREE.MeshBasicMaterial( {map: mars_texture});
+					mars = new THREE.Mesh(mars_geom, mars_mat);
+					scene.add(mars);
 
-				jupiter_mat = new THREE.MeshBasicMaterial( {map: jupiter_texture});
-				jupiter = new THREE.Mesh(jupiter_geom, jupiter_mat);
-				scene.add(jupiter);
+				} );
 
-				// Saturn
-				var saturn, saturn_geom, saturn_mat;
-				saturn_geom = new THREE.SphereGeometry(250,50,50);
-				var saturn_texture = THREE.TextureLoader().load('img/saturnmap.jpg')
 
-				saturn_mat = new THREE.MeshBasicMaterial( {map: saturn_texture});
-				saturn = new THREE.Mesh(saturn_geom, saturn_mat);
-				scene.add(saturn);
+				loader.load( 'img/jupitermap.jpg', function (jupiter_texture) {
+
+					//Jupiter
+					var jupiter_geom, jupiter_mat;
+					jupiter_geom = new THREE.SphereGeometry(350,50,50);
+	
+					//var jupiter_texture = THREE.TextureLoader().load('img/jupitermap.jpg')
+
+					jupiter_mat = new THREE.MeshBasicMaterial( {map: jupiter_texture});
+					jupiter = new THREE.Mesh(jupiter_geom, jupiter_mat);
+					scene.add(jupiter);
+
+				} );
+
+
+				loader.load( 'img/saturnmap.jpg', function (saturn_texture) {
+
+					// Saturn
+					var saturn_geom, saturn_mat;
+					saturn_geom = new THREE.SphereGeometry(250,50,50);
+					
+					//var saturn_texture = THREE.TextureLoader().load('img/saturnmap.jpg')
+
+					saturn_mat = new THREE.MeshBasicMaterial( {map: saturn_texture});
+					saturn = new THREE.Mesh(saturn_geom, saturn_mat);
+					scene.add(saturn);
+
+				} );
 
 				// // Sun
 				// var sun_geom, sun_mat;
@@ -192,8 +222,8 @@
 				sun.rotation.y += 0.005;
 				
 				mercury.rotation.y -= 0.01;
-				mercury.position.x = Math.sin(t*0.3)*4000;
-				mercury.position.z = Math.cos(t*0.3)*4000;
+				mercury.position.x = Math.sin(t*0.3)*5000;
+				mercury.position.z = Math.cos(t*0.3)*5000;
 
 				venus.rotation.y -= 0.01;
 				venus.position.x = Math.sin(t*0.2)*5500;
@@ -219,8 +249,10 @@
 
 				t += Math.PI/180*2;
 
-				camera.position.z = earth.position.z + 1000;
-				camera.position.x = earth.position.x + 1000;
+				// camera.position.z = venus.position.z + 1000;
+				// camera.position.x = venus.position.x + 1000;
+
+				// camera.lookAt(scene.position);
 
 				camera.lookAt(scene.position);
 
