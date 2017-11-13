@@ -5,6 +5,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
 	 integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 	 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+
 	 <link rel="stylesheet" href="styles.css">
 	<script src="three.min.js"></script>
 
@@ -12,25 +13,75 @@
 
 	<script src="js/Detector.js"></script>
 	<script src="js/stats.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+
 	<!-- <script src="CanvasRenderer.js"></script> -->
 	</head>
 	<body>
 		<nav>
 			<div class="container">
 				<div class="row">
-				 <div class="icon min col s1"><img src="img/mercury-icon.jpeg" alt="" width="30px"><div class="text">Mercury</div></div>
-				 <div class="icon min col s1"><img src="img/venus-icon.jpg" alt="" ><div class="text">Venus</div></div>
-				 <div class="icon col s1"><img src="img/earth-icon.jpg" onclick="earthZoom();" alt="" ><div class="text">Earth</div></div>
-				 <div class="icon min col s1"><img src="img/mars-icon.jpeg" alt="" ><div class="text">Mars</div></div>
-				 <div class="icon min col s1"><img src="img/jupiter-icon.png" alt="" ><div class="text">Jupiter</div></div>
-				 <div class="icon col s1"><img src="img/saturn-icon.jpg" alt="" ><div class="text">Saturn</div></div>
-				 <div class="icon col s1"><img src="img/uranus-icon.jpg" alt="" ><div class="text">Uranus</div></div>
-				 <div class="icon min col s1"><img src="img/neptune-icon.jpg" alt="" ><div class="text">Neptune</div></div>
-				 <div class="icon min col s1"><img src="img/pluto-icon.jpeg" alt="" ><div class="text">Pluto</div></div>
+				 <div class="icon min col s1" data-toggle="collapse" href="#mercury" aria-expanded="false" aria-controls="mercury venus"><img src="img/mercury-icon.jpeg" alt="" width="30px"><div class="text">Mercury</div></div>
+				 <div class="icon min col s1" data-toggle="collapse" href="#venus" aria-expanded="false" aria-controls="mercury venus earth"><img src="img/venus-icon.jpg" alt="" ><div class="text">Venus</div></div>
+				 <div class="icon col s1" data-toggle="collapse" href="#earth" aria-expanded="false" aria-controls="mercury venus earth"><img src="img/earth-icon.jpg" onclick="earthZoom();" alt="" ><div class="text">Earth</div></div>
+				 <div class="icon min col s1" data-toggle="collapse" href="#mars" aria-expanded="false" aria-controls="collapseExample"><img src="img/mars-icon.jpeg" alt="" ><div class="text">Mars</div></div>
+				 <div class="icon min col s1" data-toggle="collapse" href="#jupiter" aria-expanded="false" aria-controls="collapseExample"><img src="img/jupiter-icon.png" alt="" ><div class="text">Jupiter</div></div>
+				 <div class="icon col s1" data-toggle="collapse" href="#saturn" aria-expanded="false" aria-controls="collapseExample"><img src="img/saturn-icon.jpg" alt="" ><div class="text">Saturn</div></div>
+				 <div class="icon col s1" data-toggle="collapse" href="#uranus" aria-expanded="false" aria-controls="collapseExample"><img src="img/uranus-icon.jpg" alt="" ><div class="text">Uranus</div></div>
+				 <div class="icon min col s1" data-toggle="collapse" href="#neptune" aria-expanded="false" aria-controls="collapseExample"><img src="img/neptune-icon.jpg" alt="" ><div class="text">Neptune</div></div>
+				 <div class="icon min col s1" data-toggle="collapse" href="#pluto" aria-expanded="false" aria-controls="collapseExample"><img src="img/pluto-icon.jpeg" alt="" ><div class="text">Pluto</div></div>
 				 <div class="icon min col s1"><i class="fa fa-space-shuttle" aria-hidden="true"></i>Explore</div></div>
 			 </div>
 		</nav>
-		<div id="container"></div>
+		<div id="container">
+			<div class="collapse multi-collapse" id="mercury">
+			  <div class="card card-body night">
+			    Mercury is the smallest and innermost planet in the Solar System. Its orbital period around the Sun of 88 days is the shortest of all the planets in the Solar System. It is named after the Roman deity Mercury, the messenger to the gods.
+			  </div>
+			</div>
+			<div class="collapse multi-collapse" id="venus">
+			  <div class="card card-body night">
+			    Venus is the second planet from the Sun, orbiting it every 224.7 Earth days.It has the longest rotation period (243 days) of any planet in the Solar System and rotates in the opposite direction to most other planets. It has no natural satellites.
+			  </div>
+			</div>
+			<div class="collapse multi-collapse" id="earth">
+			  <div class="card card-body night">
+			    Earth is the third planet from the Sun and the only object in the Universe known to harbor life. According to radiometric dating and other sources of evidence, Earth formed over 4 billion years ago. Earth's gravity interacts with other objects in space, especially the Sun and the Moon, Earth's only natural satellite.
+			  </div>
+			</div>
+			<div class="collapse" id="mars">
+			  <div class="card card-body night">
+			    Mars is the fourth planet from the Sun and the second-smallest planet in the Solar System after Mercury. In English, Mars carries a name of the Roman god of war, and is often referred to as the "Red Planet" because the reddish iron oxide prevalent on its surface gives it a reddish appearance that is distinctive among the astronomical bodies visible to the naked eye.
+			  </div>
+			</div>
+			<div class="collapse" id="jupiter">
+			  <div class="card card-body night">
+			    Jupiter is the fifth planet from the Sun and the largest in the Solar System. It is a giant planet with a mass one-thousandth that of the Sun, but two and a half times that of all the other planets in the Solar System combined. Jupiter and Saturn are gas giants; the other two giant planets, Uranus and Neptune are ice giants. Jupiter has been known to astronomers since antiquity.
+			  </div>
+			</div>
+			<div class="collapse" id="saturn">
+			  <div class="card card-body night">
+			    Saturn is the sixth planet from the Sun and the second-largest in the Solar System, after Jupiter. It is a gas giant with an average radius about nine times that of Earth. It has only one-eighth the average density of Earth, but with its larger volume Saturn is over 95 times more massive.
+			  </div>
+			</div>
+			<div class="collapse" id="uranus">
+			  <div class="card card-body night">
+			    Uranus is the seventh planet from the Sun. It has the third-largest planetary radius and fourth-largest planetary mass in the Solar System. Uranus is similar in composition to Neptune, and both have different bulk chemical composition from that of the larger gas giants Jupiter and Saturn.
+			  </div>
+			</div>
+			<div class="collapse" id="neptune">
+			  <div class="card card-body night">
+			    Neptune is the eighth and farthest known planet from the Sun in the Solar System. In the Solar System, it is the fourth-largest planet by diameter, the third-most-massive planet, and the densest giant planet. Neptune is 17 times the mass of Earth and is slightly more massive than its near-twin Uranus, which is 15 times the mass of Earth and slightly larger than Neptune.
+			  </div>
+			</div>
+			<div class="collapse" id="pluto">
+			  <div class="card card-body night">
+			    Pluto was discovered by Clyde Tombaugh in 1930 and was originally considered to be the ninth planet from the Sun. After 1992, its status as a planet was questioned following the discovery of several objects of similar size in the Kuiper belt. In 2005, Eris, a dwarf planet in the scattered disc which is 27% more massive than Pluto, was discovered. This led the International Astronomical Union (IAU) to define the term "planet" formally in 2006, during their 26th General Assembly. That definition excluded Pluto and reclassified it as a dwarf planet..
+			  </div>
+			</div>
+		</div>
 		<script>
 
 			if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
@@ -327,19 +378,20 @@
 			}
 
 			function render () {
-				
+
 				renderer.render(scene, camera);
 				stats.update();
 				console.log("Render Function");
 			}
 
 			function earthZoom () {
-				
+
 				//target = earth;
 				console.log("Earth Zoom");
-				
+
 			}
 
 		</script>
+  </div>
 	</body>
 </html>
