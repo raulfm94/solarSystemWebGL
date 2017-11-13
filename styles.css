@@ -36,3 +36,7 @@ nav{
 .fa-space-shuttle:hover{
   color: #2BC4F3;
 }
+.night{
+  background-color: black;
+  color: white;
+}
