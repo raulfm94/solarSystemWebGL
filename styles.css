@@ -3,10 +3,19 @@ nav{
   color: white;
   max-width: 100%;
 }
+.planets{
+  display: flex;
+  align-items: center;
+  align-content: space-between;
+  background: black;
+  color: white;
+  border-radius: 20px;
+}
 .icon{
   text-align: center;
   padding: 5px;
   cursor: pointer;
+  margin: auto;
 }
 .icon.mercury img{
   width: 37px;

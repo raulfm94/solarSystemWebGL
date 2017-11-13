@@ -6,7 +6,7 @@
 	<link rel="icon" type="image/png" href="../assets/img/favicon.png">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-	<title>System Solar by Raúl & Luis</title>
+	<title>System Solar WebGL</title>
 
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
 
@@ -18,6 +18,7 @@
 	<!-- CSS Files -->
     <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="assets/css/material-kit.css" rel="stylesheet"/>
+    <link href="styles.css" rel="stylesheet"/>
 
 </head>
 
@@ -39,7 +40,7 @@
         		<ul class="nav navbar-nav navbar-right">
     				<li>
 						<a href="solarSystem.html">
-							<i class="material-icons">unarchive</i> Go Demo
+							<i class="fa fa-globe"></i> Go Demo
 						</a>
     				</li>
         		</ul>
@@ -56,7 +57,7 @@
 	                    <h4>A demo that helps you understand our Solar System, where you can interact with the planets.</h4>
 	                    <br />
 	                    <a href="solarSystem.html" class="btn btn-outline-light">
-							<i class="fa fa-play"></i> Go demo
+							<i class="fa fa-globe"></i> Go demo
 						</a>
 					</div>
                 </div>
@@ -74,120 +75,49 @@
 	                </div>
 
 					<div class="features">
-						<div class="row">
-		                    <div class="col-md-4">
-								<div class="info">
-									<div class="icon icon-primary">
-										<i class="material-icons">chat</i>
-									</div>
-									<h4 class="info-title">First Feature</h4>
-									<p>Divide details about your product or agency work into parts. Write a few lines about each one. A paragraph describing a feature will be enough.</p>
-								</div>
-		                    </div>
-		                    <div class="col-md-4">
-								<div class="info">
-									<div class="icon icon-success">
-										<i class="material-icons">verified_user</i>
-									</div>
-									<h4 class="info-title">Second Feature</h4>
-									<p>Divide details about your product or agency work into parts. Write a few lines about each one. A paragraph describing a feature will be enough.</p>
-								</div>
-		                    </div>
-		                    <div class="col-md-4">
-								<div class="info">
-									<div class="icon icon-danger">
-										<i class="material-icons">fingerprint</i>
-									</div>
-									<h4 class="info-title">Third Feature</h4>
-									<p>Divide details about your product or agency work into parts. Write a few lines about each one. A paragraph describing a feature will be enough.</p>
-								</div>
-		                    </div>
-		                </div>
+							<div class="container">
+								<h2 class="title">Planets</h2>
+
+								<div class="row planets">
+
+ 			 				 <div class="icon min col"><img src="img/mercury-icon.jpeg" alt="" width="30px"><div class="text">Mercury</div></div>
+ 			 				 <div class="icon min col"><img src="img/venus-icon.jpg" alt="" ><div class="text">Venus</div></div>
+ 			 				 <div class="icon col"><img src="img/earth-icon.jpg" alt="" ><div class="text">Earth</div></div>
+ 			 				 <div class="icon min col"><img src="img/mars-icon.jpeg" alt="" ><div class="text">Mars</div></div>
+ 			 				 <div class="icon min col"><img src="img/jupiter-icon.png" alt="" ><div class="text">Jupiter</div></div>
+ 			 				 <div class="icon col"><img src="img/saturn-icon.jpg" alt="" ><div class="text">Saturn</div></div>
+ 			 				 <div class="icon col"><img src="img/uranus-icon.jpg" alt="" ><div class="text">Uranus</div></div>
+ 			 				 <div class="icon min col"><img src="img/neptune-icon.jpg" alt="" ><div class="text">Neptune</div></div>
+ 			 				 <div class="icon min col"><img src="img/pluto-icon.jpeg" alt="" ><div class="text">Pluto</div></div>
+
+						 </div>
+ 			 			</div>
 					</div>
-	            </div>
+	       </div>
 
 	        	<div class="section text-center">
-	                <h2 class="title">Here is our team</h2>
+	                <h2 class="title">The team</h2>
 
 					<div class="team">
 						<div class="row">
-							<div class="col-md-4">
+							<div class="col-md-6">
 			                    <div class="team-player">
-			                        <img src="../assets/img/avatar.jpg" alt="Thumbnail Image" class="img-raised img-circle">
-			                        <h4 class="title">Gigi Hadid <br />
-										<small class="text-muted">Model</small>
+			                        <img src="img/rf.jpg" alt="Thumbnail Image" class="img-raised img-circle">
+			                        <h4 class="title">Raúl Flores <br />
+										<small class="text-muted">Solar System back-end</small>
 									</h4>
-			                        <p class="description">You can write here details about one of your team members. You can give more details about what they do. Feel free to add some <a href="#">links</a> for people to be able to follow them outside the site.</p>
-									<a href="#pablo" class="btn btn-simple btn-just-icon"><i class="fa fa-twitter"></i></a>
-									<a href="#pablo" class="btn btn-simple btn-just-icon"><i class="fa fa-instagram"></i></a>
-									<a href="#pablo" class="btn btn-simple btn-just-icon btn-default"><i class="fa fa-facebook-square"></i></a>
 			                    </div>
 			                </div>
-			                <div class="col-md-4">
+			                <div class="col-md-6">
 			                    <div class="team-player">
-			                        <img src="../assets/img/christian.jpg" alt="Thumbnail Image" class="img-raised img-circle">
-			                        <h4 class="title">Christian Louboutin<br />
-										<small class="text-muted">Designer</small>
+			                        <img src="img/pp.jpg" alt="Thumbnail Image" class="img-raised img-circle">
+			                        <h4 class="title">Luis Mendoza<br />
+										<small class="text-muted">Solar System front-end</small>
 									</h4>
-			                        <p class="description">You can write here details about one of your team members. You can give more details about what they do. Feel free to add some <a href="#">links</a> for people to be able to follow them outside the site.</p>
-									<a href="#pablo" class="btn btn-simple btn-just-icon"><i class="fa fa-twitter"></i></a>
-									<a href="#pablo" class="btn btn-simple btn-just-icon"><i class="fa fa-linkedin"></i></a>
-			                    </div>
-			                </div>
-			                <div class="col-md-4">
-			                    <div class="team-player">
-			                        <img src="../assets/img/kendall.jpg" alt="Thumbnail Image" class="img-raised img-circle">
-			                        <h4 class="title">Kendall Jenner<br />
-										<small class="text-muted">Model</small>
-									</h4>
-			                        <p>You can write here details about one of your team members. You can give more details about what they do. Feel free to add some <a href="#">links</a> for people to be able to follow them outside the site.</p>
-									<a href="#pablo" class="btn btn-simple btn-just-icon"><i class="fa fa-google-plus"></i></a>
-									<a href="#pablo" class="btn btn-simple btn-just-icon"><i class="fa fa-youtube-play"></i></a>
-									<a href="#pablo" class="btn btn-simple btn-just-icon btn-default"><i class="fa fa-twitter"></i></a>
 			                    </div>
 			                </div>
 						</div>
 					</div>
-
-	            </div>
-
-
-	        	<div class="section landing-section">
-	                <div class="row">
-	                    <div class="col-md-8 col-md-offset-2">
-	                        <h2 class="text-center title">Work with us</h2>
-							<h4 class="text-center description">Divide details about your product or agency work into parts. Write a few lines about each one and contact us about any further collaboration. We will responde get back to you in a couple of hours.</h4>
-	                        <form class="contact-form">
-	                            <div class="row">
-	                                <div class="col-md-6">
-										<div class="form-group label-floating">
-											<label class="control-label">Your Name</label>
-											<input type="email" class="form-control">
-										</div>
-	                                </div>
-	                                <div class="col-md-6">
-										<div class="form-group label-floating">
-											<label class="control-label">Your Email</label>
-											<input type="email" class="form-control">
-										</div>
-	                                </div>
-	                            </div>
-
-								<div class="form-group label-floating">
-									<label class="control-label">Your Messge</label>
-									<textarea class="form-control" rows="4"></textarea>
-								</div>
-
-	                            <div class="row">
-	                                <div class="col-md-4 col-md-offset-4 text-center">
-	                                    <button class="btn btn-primary btn-raised">
-											Send Message
-										</button>
-	                                </div>
-	                            </div>
-	                        </form>
-	                    </div>
-	                </div>
 
 	            </div>
 	        </div>
@@ -196,32 +126,8 @@
 
 	    <footer class="footer">
 	        <div class="container">
-	            <nav class="pull-left">
-	                <ul>
-	                    <li>
-	                        <a href="http://www.creative-tim.com">
-	                            Creative Tim
-	                        </a>
-	                    </li>
-						<li>
-	                        <a href="http://presentation.creative-tim.com">
-	                           About Us
-	                        </a>
-	                    </li>
-	                    <li>
-	                        <a href="http://blog.creative-tim.com">
-	                           Blog
-	                        </a>
-	                    </li>
-	                    <li>
-	                        <a href="http://www.creative-tim.com/license">
-	                            Licenses
-	                        </a>
-	                    </li>
-	                </ul>
-	            </nav>
 	            <div class="copyright pull-right">
-	                &copy; 2016, made with <i class="fa fa-heart heart"></i> by Creative Tim
+	                &copy; 2017, made with <i class="fa fa-beer"></i> by Raúl & Luis.
 	            </div>
 	        </div>
 	    </footer>
