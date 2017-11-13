@@ -9,11 +9,19 @@
 			}
 	</style>
 	<script src="three.min.js"></script>
+
+	<script src="js/TrackballControls.js"></script>
+
+	<script src="js/Detector.js"></script>
+	<script src="js/stats.min.js"></script>
 	<!-- <script src="CanvasRenderer.js"></script> -->
 	</head>
 	<body>
+
+		<div id="container"></div>
+
 		<script>
-			var scene, camera, render;
+			var scene, camera, renderer, controls;
 			var sun, mercury, venus, earth, mars, jupiter, saturn;
 			var t = 0;
 			var y = 0;
@@ -25,6 +33,23 @@
 
 				camera = new THREE.PerspectiveCamera(45,window.innerWidth / window.innerHeight,1,1000000);
 				camera.position.z = 45000;
+
+				//Camera for movement
+				controls = new THREE.TrackballControls (camera);
+
+				controls.rotateSpeed = 1.0;
+				controls.zoomSpeed = 1.2;
+				controls.panSpeed = 0.8;
+
+				controls.noZoom = false;
+				controls.noPan = false;
+
+				controls.staticMoving = false;
+				controls.dynamicDampingFactor = 0.3
+
+				controls.keys = [65, 83, 68];
+
+				controls.addEventListener( 'change', render);
 
 				scene = new THREE.Scene();
 
@@ -196,15 +221,27 @@
 				scene.add(ambient);
 
 
-				render = new THREE.WebGLRenderer();
-				render.setPixelRatio(window.devicePixelRatio);
-				render.setSize(window.innerWidth, window.innerHeight);
-				document.body.appendChild(render.domElement);
+
+				// Renderer
+
+				renderer = new THREE.WebGLRenderer( antialias: false);
+				renderer.setPixelRatio(window.devicePixelRatio);
+				renderer.setSize(window.innerWidth, window.innerHeight);
+
+
+				container = document.getElementById( 'container');
+				container.appendChild(renderer.domElement);
+
+				stats = new Stats();
+				container.appendChild(stats.dom);
 
 				window.addEventListener('resize', onWindowResize, false);
-				document.addEventListener('mousemove', function (event) {
-					y = parseInt(event.offsetY);
-				});
+
+				// document.addEventListener('mousemove', function (event) {
+				// 	y = parseInt(event.offsetY);
+				// });
+
+				render();
 			}
 
 			function onWindowResize(){
@@ -212,8 +249,14 @@
 				camera.aspect = window.innerWidth / window.innerHeight;
 				camera.updateProjectionMatrix();
 
-				render.setSize(window.innerWidth, window.innerHeight);
+				renderer.setSize(window.innerWidth, window.innerHeight);
+
+				controls.handleResize();
+
+				render();
 			}
+
+
 
 			function animate(){
 
@@ -254,9 +297,21 @@
 
 				// camera.lookAt(scene.position);
 
-				camera.lookAt(scene.position);
+				// camera.lookAt(scene.position);
 
-				render.render(scene,camera);
+				// render.render(scene,camera);
+
+				controls.update();
+			}
+
+			function render () {
+				
+				renderer.render(scene, camera);
+				stats.update();
+			}
+
+			function earth (argument) {
+				// body...
 			}
 
 		</script>
