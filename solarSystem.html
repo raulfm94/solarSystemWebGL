@@ -20,7 +20,7 @@
 				<div class="row">
 				 <div class="icon min col s1"><img src="img/mercury-icon.jpeg" alt="" width="30px"><div class="text">Mercury</div></div>
 				 <div class="icon min col s1"><img src="img/venus-icon.jpg" alt="" ><div class="text">Venus</div></div>
-				 <div class="icon col s1"><img src="img/earth-icon.jpg" alt="" ><div class="text">Earth</div></div>
+				 <div class="icon col s1"><img src="img/earth-icon.jpg" onclick="earthZoom();" alt="" ><div class="text">Earth</div></div>
 				 <div class="icon min col s1"><img src="img/mars-icon.jpeg" alt="" ><div class="text">Mars</div></div>
 				 <div class="icon min col s1"><img src="img/jupiter-icon.png" alt="" ><div class="text">Jupiter</div></div>
 				 <div class="icon col s1"><img src="img/saturn-icon.jpg" alt="" ><div class="text">Saturn</div></div>
@@ -40,6 +40,7 @@
 			var sun, mercury, venus, earth, mars, jupiter, saturn;
 			var t = 0;
 			var y = 0;
+			//var target = scene;
 
 			init();
 			animate();
@@ -59,7 +60,7 @@
 				controls.noZoom = false;
 				controls.noPan = false;
 
-				controls.staticMoving = false;
+				controls.staticMoving = true;
 				controls.dynamicDampingFactor = 0.3
 
 				controls.keys = [65, 83, 68];
@@ -303,7 +304,9 @@
 				saturn.position.x = Math.sin(t*0.08)*12000;
 				saturn.position.z = Math.cos(t*0.08)*12000;
 
-
+				// camera.position.z = earth.position.z + 100;
+				// camera.position.x = earth.position.x + 100;
+				// camera.lookAt(earth.position);
 
 				t += Math.PI/180*2;
 
@@ -317,16 +320,24 @@
 				// render.render(scene,camera);
 
 				controls.update();
+
+
+
+				renderer.render(scene, camera);
 			}
 
 			function render () {
 				
 				renderer.render(scene, camera);
 				stats.update();
+				console.log("Render Function");
 			}
 
-			function earth (argument) {
-				// body...
+			function earthZoom () {
+				
+				//target = earth;
+				console.log("Earth Zoom");
+				
 			}
 
 		</script>
