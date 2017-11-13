@@ -1,0 +1,7 @@
+var mercury, mercury_geom, mercury_mat;
+				mercury_geom = new THREE.SphereGeometry(60,20,20);
+				var mercury_texture = THREE.TextureLoader().load('img/mercurymap.jpg')
+
+				mercury_mat = new THREE.MeshBasicMaterial( {map: mercury_texture});
+				mercury = new THREE.Mesh(mercury_geom, mercury_mat);
+				scene.add(mercury);
