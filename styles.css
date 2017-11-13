@@ -30,3 +30,9 @@ nav{
   margin-top: 5px;
   display: block;
 }
+.fa-space-shuttle{
+  font-size: 45px;
+}
+.fa-space-shuttle:hover{
+  color: #2BC4F3;
+}
