@@ -15,7 +15,6 @@
 	<!-- <script src="CanvasRenderer.js"></script> -->
 	</head>
 	<body>
-		<div id="container"></div>
 		<nav>
 			<div class="container">
 				<div class="row">
@@ -29,11 +28,14 @@
 				 <div class="icon min col s1"><img src="img/neptune-icon.jpg" alt="" ><div class="text">Neptune</div></div>
 				 <div class="icon min col s1"><img src="img/pluto-icon.jpeg" alt="" ><div class="text">Pluto</div></div>
 				 <div class="icon min col s1"><i class="fa fa-space-shuttle" aria-hidden="true"></i>Explore</div></div>
-
-
 			 </div>
 		</nav>
+		<div id="container"></div>
 		<script>
+
+			if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
+
+			var container, stats;
 			var scene, camera, renderer, controls;
 			var sun, mercury, venus, earth, mars, jupiter, saturn;
 			var t = 0;
@@ -237,7 +239,7 @@
 
 				// Renderer
 
-				renderer = new THREE.WebGLRenderer( antialias: false);
+				renderer = new THREE.WebGLRenderer( {antialias: false});
 				renderer.setPixelRatio(window.devicePixelRatio);
 				renderer.setSize(window.innerWidth, window.innerHeight);
 
