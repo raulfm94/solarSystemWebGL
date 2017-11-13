@@ -32,7 +32,7 @@
 				 <div class="icon col s1" data-toggle="collapse" href="#saturn" aria-expanded="false" aria-controls="collapseExample"><img src="img/saturn-icon.jpg" alt="" ><div class="text">Saturn</div></div>
 				 <div class="icon col s1" data-toggle="collapse" href="#uranus" aria-expanded="false" aria-controls="collapseExample"><img src="img/uranus-icon.jpg" alt="" ><div class="text">Uranus</div></div>
 				 <div class="icon min col s1" data-toggle="collapse" href="#neptune" aria-expanded="false" aria-controls="collapseExample"><img src="img/neptune-icon.jpg" alt="" ><div class="text">Neptune</div></div>
-				 <div class="icon min col s1" data-toggle="collapse" href="#pluto" aria-expanded="false" aria-controls="collapseExample"><img src="img/pluto-icon.jpeg" alt="" ><div class="text">Moon</div></div>
+				 <div class="icon min col s1" data-toggle="collapse" href="#pluto" aria-expanded="false" onclick="showPlanet(10)" aria-controls="collapseExample"><img src="img/pluto-icon.jpeg" alt="" ><div class="text">Moon</div></div>
 				 <div class="icon min col s1">
 				 	<i class="fa fa-space-shuttle" aria-hidden="true"></i>Explore</div></div>
 			 </div>
@@ -90,7 +90,7 @@
 
 			var container, stats;
 			var scene, camera, renderer, controls;
-			var sun, mercury, venus, earth, mars, jupiter, saturn, uranus, neptune, ring;
+			var sun, mercury, venus, earth, mars, jupiter, saturn, uranus, neptune, ring, moon;
 			var t = 0;
 			var y = 0;
 			var info = false;
@@ -197,6 +197,23 @@
 					earth = new THREE.Mesh(earth_geom,earth_mat);
 					earth.castShadow = true;
 					scene.add(earth);
+
+				} );
+
+				// Moon
+				loader.load( 'img/moonmap.jpg', function (moon_texture) {
+
+					// Moon
+					var moon_geom, moon_mat;
+					moon_geom = new THREE.SphereGeometry(40,20,20);
+
+					//var texture2 = THREE.TextureLoader('earth.jpg');
+					//texture2.anisotropy = 8;
+					moon_mat = new THREE.MeshBasicMaterial( {map: moon_texture});
+					moon = new THREE.Mesh(moon_geom,moon_mat);
+					//earth.position.x = 1500;
+					moon.castShadow = true;
+					scene.add(moon);
 
 				} );
 
@@ -426,6 +443,9 @@
 				neptune.position.x = Math.sin(t*0.01)*180000;
 				neptune.position.z = Math.cos(t*0.01)*180000;
 
+				moon.position.x = earth.position.x + Math.sin(t*1)*1000;
+				moon.position.z = earth.position.z + Math.cos(t*1)*1000;
+
 				mercury.rotation.y -= 0.01;
 				venus.rotation.y -= 0.01;
 				earth.rotation.y -= 0.01;
@@ -435,6 +455,7 @@
 				ring.rotation.y -= 0.001; //use oposite
 				neptune.rotation.y -= 0.01;
 				uranus.rotation.y -= 0.01
+				moon.rotation.y -= 0.05;
 
 				t += Math.PI/180*2;
 
