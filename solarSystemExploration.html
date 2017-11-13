@@ -9,7 +9,8 @@
 	 <link rel="stylesheet" href="styles.css">
 	<script src="three.min.js"></script>
 
-	<script src="js/TrackballControls.js"></script>
+	<!-- <script src="js/TrackballControls.js"></script> -->
+	<script src="js/OrbitControls.js"></script>
 
 	<script src="js/Detector.js"></script>
 	<script src="js/stats.min.js"></script>
@@ -23,16 +24,17 @@
 		<nav>
 			<div class="container">
 				<div class="row">
-				 <div class="icon min col s1" data-toggle="collapse" href="#mercury" aria-expanded="false" onclick="showPlanet(1)" aria-controls="mercury venus"><img src="img/mercury-icon.jpeg" alt="" width="30px"><div class="text">Mercury</div></div>
-				 <div class="icon min col s1" data-toggle="collapse" href="#venus" aria-expanded="false" onclick="showPlanet(2)" aria-controls="mercury venus earth"><img src="img/venus-icon.jpg" alt="" ><div class="text">Venus</div></div>
-				 <div class="icon col s1" data-toggle="collapse" href="#earth" aria-expanded="false" onclick="showPlanet(3)" aria-controls="mercury venus earth"><img src="img/earth-icon.jpg" alt="" ><div class="text">Earth</div></div>
-				 <div class="icon min col s1" data-toggle="collapse" href="#mars" aria-expanded="false" onclick="showPlanet(4)" aria-controls="collapseExample"><img src="img/mars-icon.jpeg" alt="" ><div class="text">Mars</div></div>
-				 <div class="icon min col s1" data-toggle="collapse" href="#jupiter" aria-expanded="false" onclick="showPlanet(5)" aria-controls="collapseExample"><img src="img/jupiter-icon.png" alt="" ><div class="text">Jupiter</div></div>
-				 <div class="icon col s1" data-toggle="collapse" href="#saturn" aria-expanded="false" onclick="showPlanet(6)" aria-controls="collapseExample"><img src="img/saturn-icon.jpg" alt="" ><div class="text">Saturn</div></div>
-				 <div class="icon col s1" data-toggle="collapse" href="#uranus" aria-expanded="false" onclick="showPlanet(7)" aria-controls="collapseExample"><img src="img/uranus-icon.jpg" alt="" ><div class="text">Uranus</div></div>
-				 <div class="icon min col s1" data-toggle="collapse" href="#neptune" aria-expanded="false" onclick="showPlanet(8)" aria-controls="collapseExample"><img src="img/neptune-icon.jpg" alt="" ><div class="text">Neptune</div></div>
+				 <div class="icon min col s1" data-toggle="collapse" href="#mercury" aria-expanded="false" aria-controls="mercury venus"><img src="img/mercury-icon.jpeg" alt="" width="30px"><div class="text">Mercury</div></div>
+				 <div class="icon min col s1" data-toggle="collapse" href="#venus" aria-expanded="false" aria-controls="mercury venus earth"><img src="img/venus-icon.jpg" alt="" ><div class="text">Venus</div></div>
+				 <div class="icon col s1" data-toggle="collapse" href="#earth" aria-expanded="false" aria-controls="mercury venus earth"><img src="img/earth-icon.jpg" alt="" ><div class="text">Earth</div></div>
+				 <div class="icon min col s1" data-toggle="collapse" href="#mars" aria-expanded="false" aria-controls="collapseExample"><img src="img/mars-icon.jpeg" alt="" ><div class="text">Mars</div></div>
+				 <div class="icon min col s1" data-toggle="collapse" href="#jupiter" aria-expanded="false" aria-controls="collapseExample"><img src="img/jupiter-icon.png" alt="" ><div class="text">Jupiter</div></div>
+				 <div class="icon col s1" data-toggle="collapse" href="#saturn" aria-expanded="false" aria-controls="collapseExample"><img src="img/saturn-icon.jpg" alt="" ><div class="text">Saturn</div></div>
+				 <div class="icon col s1" data-toggle="collapse" href="#uranus" aria-expanded="false" aria-controls="collapseExample"><img src="img/uranus-icon.jpg" alt="" ><div class="text">Uranus</div></div>
+				 <div class="icon min col s1" data-toggle="collapse" href="#neptune" aria-expanded="false" aria-controls="collapseExample"><img src="img/neptune-icon.jpg" alt="" ><div class="text">Neptune</div></div>
+				 <div class="icon min col s1" data-toggle="collapse" href="#pluto" aria-expanded="false" aria-controls="collapseExample"><img src="img/pluto-icon.jpeg" alt="" ><div class="text">Moon</div></div>
 				 <div class="icon min col s1">
-				 	<a href="solarSystemExploration.html"><i class="fa fa-space-shuttle" aria-hidden="true"></i>Explore</div></div>
+				 	<i class="fa fa-space-shuttle" aria-hidden="true"></i>Explore</div></div>
 			 </div>
 		</nav>
 		<div id="container">
@@ -76,26 +78,25 @@
 			    Neptune is the eighth and farthest known planet from the Sun in the Solar System. In the Solar System, it is the fourth-largest planet by diameter, the third-most-massive planet, and the densest giant planet. Neptune is 17 times the mass of Earth and is slightly more massive than its near-twin Uranus, which is 15 times the mass of Earth and slightly larger than Neptune.
 			  </div>
 			</div>
+			<div class="collapse" id="moon">
+			  <div class="card card-body night">
+			    Pluto was discovered by Clyde Tombaugh in 1930 and was originally considered to be the ninth planet from the Sun. After 1992, its status as a planet was questioned following the discovery of several objects of similar size in the Kuiper belt. In 2005, Eris, a dwarf planet in the scattered disc which is 27% more massive than Pluto, was discovered. This led the International Astronomical Union (IAU) to define the term "planet" formally in 2006, during their 26th General Assembly. That definition excluded Pluto and reclassified it as a dwarf planet..
+			  </div>
+			</div>
 		</div>
 		<script>
 
 			if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
 
 			var container, stats;
-			var scene, camera, renderer;
+			var scene, camera, renderer, controls;
 			var sun, mercury, venus, earth, mars, jupiter, saturn, uranus, neptune, ring;
 			var t = 0;
 			var y = 0;
 			var info = false;
 			var infoMercury = false;
-			var infoVenus = false;
 			var infoEarth = false;
-			var infoMars = false;
 			var infoJupiter = false;
-			var infoSaturn = false;
-			var infoUranus = false;
-			var infoNeptune = false;
-			var infoSun = false;
 
 			var light;
 			//var target = scene;
@@ -117,42 +118,28 @@
 				};
 			};
 
-			var Planet = function(radius, texture) {
-				this.radius = radius;
-				this.texture = texture;
-				this.init2 = function() {
-					var g = new THREE.SphereGeometry(this.radius, 40, 40);
-					var onloadT = new THREE.TextureLoader();
-
-					onloadT.load(this.texture);
-
-					var m = new THREE.MeshBasicMaterial({map: onloadT});
-					var M = new THREE.Mesh(g,m);
-					M.castShadow = true;
-
-					return M;
-				}
-			}
 
 			init();
 			animate();
 
 			function init() {
 				camera = new THREE.PerspectiveCamera(45,window.innerWidth / window.innerHeight,1,1000000);
-				camera.position.z = 200000;
-				camera.position.y = 1000;
-				// camera.position.y = 5000;
-				// camera.rotation.z = -Math.PI.20;
+				//camera.position.z = 200000;
 
 				scene = new THREE.Scene();
-				scene.add(camera);
+				//scene.add(camera);
+
+				controls = new THREE.OrbitControls(camera);
+
+				camera.position.set(0,20,200000);
+				controls.update();
+
+				
 
 				
 				light = new THREE.PointLight(0xffffff,1.7,200000);
 				light.position.set(0,0,0);
 				light.castShadow = true;
-				//light.mapSize.width = 2048;
-				//light.mapSize.heigth = 2048;
 				scene.add(light);
 
 				// Code....
@@ -165,8 +152,6 @@
 					var sun_geom, sun_mat;
 					sun_geom = new THREE.SphereGeometry(2300,80,80);
 
-					// var texture = THREE.TextureLoader( 'sun2.png' );
-					//texture.anisotropy = 8;
 					sun_mat = new THREE.MeshPhongMaterial( { map: texture, emissive: 0xe09304});
 					sun = new THREE.Mesh(sun_geom,sun_mat);
 					scene.add(sun);
@@ -180,16 +165,12 @@
 					var mercury_geom, mercury_mat;
 					mercury_geom = new THREE.SphereGeometry(60,20,20);
 
-					//var mercury_texture = THREE.TextureLoader().load('img/mercurymap.jpg')
-
 					mercury_mat = new THREE.MeshBasicMaterial( {map: mercury_texture});
 					mercury = new THREE.Mesh(mercury_geom, mercury_mat);
+					mercury.castShadow = true;
 					scene.add(mercury);
 
 				} );
-
-				// mercury = new Planet(60, "img/mercurymap.jpg").init2();
-				// scene.add(mercury);
 
 				loader.load( 'img/venusmap.jpg', function (venus_texture) {
 
@@ -197,10 +178,9 @@
 					var venus_geom, venus_mat;
 					venus_geom = new THREE.SphereGeometry(90,20,20);
 
-					//var venus_texture = THREE.TextureLoader().load('img/venusmap.jpg')
-
 					venus_mat = new THREE.MeshBasicMaterial( {map: venus_texture});
 					venus = new THREE.Mesh(venus_geom, venus_mat);
+					venus.castShadow = true;
 					scene.add(venus);
 
 				} );
@@ -213,11 +193,9 @@
 					var earth_geom, earth_mat;
 					earth_geom = new THREE.SphereGeometry(100,20,20);
 
-					//var texture2 = THREE.TextureLoader('earth.jpg');
-					//texture2.anisotropy = 8;
 					earth_mat = new THREE.MeshBasicMaterial( {map: texture2});
 					earth = new THREE.Mesh(earth_geom,earth_mat);
-					//earth.position.x = 1500;
+					earth.castShadow = true;
 					scene.add(earth);
 
 				} );
@@ -244,10 +222,9 @@
 					var mars_geom, mars_mat;
 					mars_geom = new THREE.SphereGeometry(80,20,20);
 
-					//var mars_texture = THREE.TextureLoader().load('img/marsmap.jpg')
-
 					mars_mat = new THREE.MeshBasicMaterial( {map: mars_texture});
 					mars = new THREE.Mesh(mars_geom, mars_mat);
+					mars.castShadow = true;
 					scene.add(mars);
 
 				} );
@@ -258,8 +235,6 @@
 					//Jupiter
 					var jupiter_geom, jupiter_mat;
 					jupiter_geom = new THREE.SphereGeometry(350,20,20);
-
-					//var jupiter_texture = THREE.TextureLoader().load('img/jupitermap.jpg')
 
 					jupiter_mat = new THREE.MeshBasicMaterial( {map: jupiter_texture});
 					jupiter = new THREE.Mesh(jupiter_geom, jupiter_mat);
@@ -275,10 +250,9 @@
 					var saturn_geom, saturn_mat;
 					saturn_geom = new THREE.SphereGeometry(230,20,20);
 
-					//var saturn_texture = THREE.TextureLoader().load('img/saturnmap.jpg')
-
 					saturn_mat = new THREE.MeshBasicMaterial( {map: saturn_texture});
 					saturn = new THREE.Mesh(saturn_geom, saturn_mat);
+					saturn.castShadow = true;
 					scene.add(saturn);
 
 				} );
@@ -307,10 +281,9 @@
 					var uranus_geom, uranus_mat;
 					uranus_geom = new THREE.SphereGeometry(170,40,40);
 
-					//var saturn_texture = THREE.TextureLoader().load('img/saturnmap.jpg')
-
 					uranus_mat = new THREE.MeshBasicMaterial( {map: uranus_texture});
 					uranus = new THREE.Mesh(uranus_geom, uranus_mat);
+					uranus.castShadow = true;
 					scene.add(uranus);
 
 				} );
@@ -321,32 +294,12 @@
 					var neptune_geom, neptune_mat;
 					neptune_geom = new THREE.SphereGeometry(160,40,40);
 
-					//var saturn_texture = THREE.TextureLoader().load('img/saturnmap.jpg')
-
 					neptune_mat = new THREE.MeshBasicMaterial( {map: neptune_texture});
 					neptune = new THREE.Mesh(neptune_geom, neptune_mat);
+					neptune.castShadow = true;
 					scene.add(neptune);
 
 				} );
-
-				// // Sun
-				// var sun_geom, sun_mat;
-				// sun_geom = new THREE.SphereGeometry(2030,80,80);
-				// var texture = THREE.TextureLoader( 'sun2.png' );
-				// //texture.anisotropy = 8;
-				// sun_mat = new THREE.MeshBasicMaterial( {map: texture});
-				// sun = new THREE.Mesh(sun_geom,sun_mat);
-				// scene.add(sun);
-
-				// // Earth
-				// var earth_geom, earth_mat;
-				// earth_geom = new THREE.SphereGeometry(50,20,20);
-				// var texture2 = THREE.TextureLoader('earth.jpg');
-				// //texture2.anisotropy = 8;
-				// earth_mat = new THREE.MeshBasicMaterial( {map: texture2});
-				// earth = new THREE.Mesh(earth_geom,earth_mat);
-				// //earth.position.x = 1500;
-				// scene.add(earth);
 
 				// Stars
 				var starsGeometry = new THREE.Geometry();
@@ -420,11 +373,12 @@
 				container = document.getElementById( 'container');
 				container.appendChild(renderer.domElement);
 
-				// stats = new Stats();
-				// container.appendChild(stats.dom);
+				stats = new Stats();
+				container.appendChild(stats.dom);
 
 				window.addEventListener('resize', onWindowResize, false);
-				window.addEventListener('showPlanet', showPlanet);
+
+				render();
 			}
 
 			function onWindowResize(){
@@ -433,9 +387,9 @@
 				camera.updateProjectionMatrix();
 
 				renderer.setSize(window.innerWidth, window.innerHeight);
+
+				render();
 			}
-
-
 
 			function animate(){
 
@@ -443,250 +397,64 @@
 
 				sun.rotation.y += 0.001;
 
+				controls.update();
 
-				if(!info){
-					mercury.position.x = Math.sin(t*0.3)*8000;
-					mercury.position.z = Math.cos(t*0.3)*8000;
+				mercury.position.x = Math.sin(t*0.3)*8000;
+				mercury.position.z = Math.cos(t*0.3)*8000;
 
-					venus.position.x = Math.sin(t*0.2)*17000;
-					venus.position.z = Math.cos(t*0.2)*17000;
+				venus.position.x = Math.sin(t*0.2)*17000;
+				venus.position.z = Math.cos(t*0.2)*17000;
 
-					earth.position.x = Math.sin(t*0.1)*30000;
-					earth.position.z = Math.cos(t*0.1)*30000;
+				earth.position.x = Math.sin(t*0.1)*30000;
+				earth.position.z = Math.cos(t*0.1)*30000;
 
-					mars.position.x = Math.sin(t*0.08)*50000;
-					mars.position.z = Math.cos(t*0.08)*50000;
-					
-					jupiter.position.x = Math.sin(t*0.06)*(74000);
-					jupiter.position.z = Math.cos(t*0.06)*(74000);
+				mars.position.x = Math.sin(t*0.08)*50000;
+				mars.position.z = Math.cos(t*0.08)*50000;
+				
+				jupiter.position.x = Math.sin(t*0.06)*(-74000);
+				jupiter.position.z = Math.cos(t*0.06)*(-74000);
 
-					saturn.position.x = Math.sin(t*0.04)*98000;
-					saturn.position.z = Math.cos(t*0.04)*98000;
+				saturn.position.x = Math.sin(t*0.04)*98000;
+				saturn.position.z = Math.cos(t*0.04)*98000;
 
-					ring.position.x = saturn.position.x;
-					ring.position.z = saturn.position.z;
+				ring.position.x = saturn.position.x;
+				ring.position.z = saturn.position.z;
 
-					uranus.position.x = Math.sin(t*0.02)*120000;
-					uranus.position.z = Math.cos(t*0.02)*120000;
+				uranus.position.x = Math.sin(t*0.02)*120000;
+				uranus.position.z = Math.cos(t*0.02)*120000;
 
-					neptune.position.x = Math.sin(t*0.01)*180000;
-					neptune.position.z = Math.cos(t*0.01)*180000;
-				}
-				else
-				{
-					if(infoMercury){
-						if(camera.position.z>mercury.position.z+1000){
-							camera.position.z-=100;
-							camera.lookAt(mercury.position);
-							console.log("Approaching Mercury");
-						}
-						if(camera.position.x<mercury.position.x-150){
-							camera.position.x+=40;
-						}
-					}
-					if(infoVenus){
-						if(camera.position.z>venus.position.z+100){
-							camera.position.z-=80;
-							camera.lookAt(venus.position);
-							console.log("Approaching Venus");
-						}
-						if(camera.position.x<venus.position.x-300){
-							camera.position.x+=30;
-						}
-					}
-					if(infoEarth){
-						if(camera.position.z>earth.position.z+100){
-							camera.position.z-=80;
-							camera.lookAt(earth.position);
-							console.log("Approaching Earth");
-						}
-						if(camera.position.x<earth.position.x-300){
-							camera.position.x+=30;
-						}
-					}
-					if(infoMars){
-						if(camera.position.z>mars.position.z+100){
-							camera.position.z-=80;
-							camera.lookAt(mars.position);
-							console.log("Approaching Mars");
-						}
-						if(camera.position.x<mars.position.x-300){
-							camera.position.x+=30;
-						}
-					}
-					if(infoJupiter){
-						if(camera.position.z>jupiter.position.z+1000){
-							camera.position.z-=100;
-							camera.lookAt(jupiter.position);
-							console.log("Approaching Jupiter");
-						}
-						if(camera.position.x<jupiter.position.x-1000){
-							camera.position.x+=100;
-						}
-					}
-					if(infoSaturn){
-						if(camera.position.z>saturn.position.z+1000){
-							camera.position.z-=100;
-							camera.lookAt(saturn.position);
-							console.log("Approaching Saturn");
-						}
-						if(camera.position.x<saturn.position.x-1000){
-							camera.position.x+=100;
-						}
-					}
-					if(infoUranus){
-						if(camera.position.z>uranus.position.z+1000){
-							camera.position.z-=100;
-							camera.lookAt(uranus.position);
-							console.log("Approaching Uranus");
-						}
-						if(camera.position.x<uranus.position.x-1000){
-							camera.position.x+=100;
-						}
-					}
-					if(infoNeptune){
-						if(camera.position.z>neptune.position.z+1000){
-							camera.position.z-=100;
-							camera.lookAt(neptune.position);
-							console.log("Approaching Neptune");
-						}
-						if(camera.position.x<neptune.position.x-1000){
-							camera.position.x+=100;
-						}
-					}
-				}				
+				neptune.position.x = Math.sin(t*0.01)*180000;
+				neptune.position.z = Math.cos(t*0.01)*180000;
 
-				mercury.rotation.y += 0.01;
-				venus.rotation.y += 0.01;
-				earth.rotation.y += 0.01;
-				mars.rotation.y += 0.01;
-				jupiter.rotation.y += 0.01;
-				saturn.rotation.y += 0.01;
+				mercury.rotation.y -= 0.01;
+				venus.rotation.y -= 0.01;
+				earth.rotation.y -= 0.01;
+				mars.rotation.y -= 0.01;
+				jupiter.rotation.y -= 0.01;
+				saturn.rotation.y -= 0.01;
 				ring.rotation.y -= 0.001; //use oposite
-				uranus.rotation.y += 0.01;
-				neptune.rotation.y += 0.01;
+				neptune.rotation.y -= 0.01;
+				uranus.rotation.y -= 0.01
 
 				t += Math.PI/180*2;
 
+				// camera.position.z = venus.position.z + 1000;
+				// camera.position.x = venus.position.x + 1000;
+
+				// camera.lookAt(scene.position);
+
+				// render.render(scene,camera);
 
 				renderer.render(scene, camera);
 			}
 
-			function showPlanet(num){
-				switch(num){
-					case 1:
-						infoMercury = true;
-						info = true;
-						infoVenus = false;
-						infoEarth = false;
-						infoMars = false;
-						infoJupiter = false;
-						infoSaturn = false;
-						infoUranus = false;
-						infoNeptune = false;
-						infoSun = false;
-					break;
-					case 2:
-						infoVenus = true;
-						info = true;
-						infoMercury = false;
-						infoEarth = false;
-						infoMars = false;
-						infoJupiter = false;
-						infoSaturn = false;
-						infoUranus = false;
-						infoNeptune = false;
-						infoSun = false;
-					break;
-					case 3:
-						infoEarth = true;
-						info = true;
-						infoMercury = false;
-						infoVenus = false;
-						infoMars = false;
-						infoJupiter = false;
-						infoSaturn = false;
-						infoUranus = false;
-						infoNeptune = false;
-						infoSun = false;
-					break;
-					case 4:
-						infoMars = true;
-						info = true;
-						infoMercury = false;
-						infoVenus = false;
-						infoEarth = false;
-						infoJupiter = false;
-						infoSaturn = false;
-						infoUranus = false;
-						infoNeptune = false;
-						infoSun = false;
-					break;
-					case 5:
-						infoJupiter = true;
-						info = true;
-						infoMercury = false;
-						infoVenus = false;
-						infoEarth = false;
-						infoMars = false;
-						infoSaturn = false;
-						infoUranus = false;
-						infoNeptune = false;
-						infoSun = false;
-					break;
-					case 6:
-						infoSaturn = true;
-						info = true;
-						infoMercury = false;
-						infoVenus = false;
-						infoEarth = false;
-						infoMars = false;
-						infoJupiter = false;
-						infoUranus = false;
-						infoNeptune = false;
-						infoSun = false;
-					break;
-					case 7:
-						infoUranus = true;
-						info = true;
-						infoMercury = false;
-						infoVenus = false;
-						infoEarth = false;
-						infoMars = false;
-						infoJupiter = false;
-						infoSaturn = false;
-						infoNeptune = false;
-						infoSun = false;
-					break;
-					case 8:
-						infoNeptune = true;
-						info = true;
-						infoMercury = false;
-						infoVenus = false;
-						infoEarth = false;
-						infoMars = false;
-						infoJupiter = false;
-						infoSaturn = false;
-						infoUranus = false;
-						infoSun = false;
-					break;
-					case 9:
-						infoSun = true;
-						info = true;
-						infoMercury = false;
-						infoVenus = false;
-						infoEarth = false;
-						infoMars = false;
-						infoJupiter = false;
-						infoSaturn = false;
-						infoUranus = false;
-						infoNeptune = false;
-					break;
-					default:
-					break;
-				}
-			}
+			function render () {
 
+				//renderer.render(scene, camera);
+
+				stats.update();
+				//console.log("Render Function");
+			}
 		</script>
   </div>
 	</body>
