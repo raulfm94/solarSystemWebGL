@@ -37,10 +37,29 @@
 
 			var container, stats;
 			var scene, camera, renderer, controls;
-			var sun, mercury, venus, earth, mars, jupiter, saturn;
+			var sun, mercury, venus, earth, mars, jupiter, saturn, uranus, neptune, ring;
 			var t = 0;
 			var y = 0;
+
+			var light;
 			//var target = scene;
+
+			var Orbit = function(radius) {
+				this.radius = radius;
+
+				this.draw = function(scene){
+					var og = new THREE.Geometry();
+					var om = new THREE.PointsMaterial({color: 0xbfbfbf, size:1, sizeAttenuation: false});
+					for(var i = 0; i<50000;i++){
+						var v = new THREE.Vector3();
+						v.x = Math.sin(Math.PI/180*i)*this.radius;
+						v.z = Math.cos(Math.PI/180*i)*this.radius;
+						og.vertices.push(v);
+					}
+					var obj = new THREE.Points(og,om);
+					scene.add(obj);
+				};
+			};
 
 			init();
 			animate();
@@ -48,7 +67,12 @@
 			function init() {
 
 				camera = new THREE.PerspectiveCamera(45,window.innerWidth / window.innerHeight,1,1000000);
-				camera.position.z = 45000;
+				camera.position.z = 200000;
+				// camera.position.y = 5000;
+				// camera.rotation.z = -Math.PI.20;
+
+				scene = new THREE.Scene();
+				scene.add(camera);
 
 				//Camera for movement
 				controls = new THREE.TrackballControls (camera);
@@ -67,8 +91,13 @@
 
 				controls.addEventListener( 'change', render);
 
-				scene = new THREE.Scene();
-
+				
+				light = new THREE.PointLight(0xffffff,1.7,200000);
+				light.position.set(0,0,0);
+				light.castShadow = true;
+				//light.mapSize.width = 2048;
+				//light.mapSize.heigth = 2048;
+				scene.add(light);
 
 				// Code....
 				// Texture solution
@@ -81,13 +110,13 @@
 
 					// var texture = THREE.TextureLoader( 'sun2.png' );
 					//texture.anisotropy = 8;
-					sun_mat = new THREE.MeshBasicMaterial( { map: texture});
+					sun_mat = new THREE.MeshBasicMaterial( { map: texture, emissive: 0xffffff});
 					sun = new THREE.Mesh(sun_geom,sun_mat);
 					scene.add(sun);
 
 				} );
 
-				// Earth
+				// Mercury
 				loader.load( 'img/mercurymap.jpg', function (mercury_texture) {
 
 					// Mercury
@@ -133,6 +162,21 @@
 
 				} );
 
+				// Earth Orbit
+				var earth_orbit_geom = new THREE.Geometry();
+				var earth_orbit_mat = new THREE.PointsMaterial( {color: 0x3A3A3A, opacity:0.3, size:1, sizeAttenuation: false});
+
+				for(var i=0;i<20000;i++){
+					var vertex = new THREE.Vector3();
+					vertex.x = Math.sin(Math.PI/180*i)*30000;
+					vertex.z = Math.cos(Math.PI/180*i)*30000;
+					earth_orbit_geom.vertices.push(vertex);
+				}
+
+				var earth_orbit = new THREE.Points(earth_orbit_geom,earth_orbit_mat);
+				earth_orbit.castShadow = true;
+				scene.add(earth_orbit); // 0 0 0
+
 
 				loader.load( 'img/marsmap.jpg', function (mars_texture) {
 
@@ -153,12 +197,13 @@
 
 					//Jupiter
 					var jupiter_geom, jupiter_mat;
-					jupiter_geom = new THREE.SphereGeometry(350,50,50);
+					jupiter_geom = new THREE.SphereGeometry(350,20,20);
 
 					//var jupiter_texture = THREE.TextureLoader().load('img/jupitermap.jpg')
 
 					jupiter_mat = new THREE.MeshBasicMaterial( {map: jupiter_texture});
 					jupiter = new THREE.Mesh(jupiter_geom, jupiter_mat);
+					jupiter.castShadow = true;
 					scene.add(jupiter);
 
 				} );
@@ -168,13 +213,59 @@
 
 					// Saturn
 					var saturn_geom, saturn_mat;
-					saturn_geom = new THREE.SphereGeometry(250,50,50);
+					saturn_geom = new THREE.SphereGeometry(230,20,20);
 
 					//var saturn_texture = THREE.TextureLoader().load('img/saturnmap.jpg')
 
 					saturn_mat = new THREE.MeshBasicMaterial( {map: saturn_texture});
 					saturn = new THREE.Mesh(saturn_geom, saturn_mat);
 					scene.add(saturn);
+
+				} );
+
+				// Saturn Rings
+				var ring_saturn_geom = new THREE.Geometry();
+				var ring_saturn_mat = new THREE.PointsMaterial( {color: 0x3A3A3A, opacity:0.3, size:1, sizeAttenuation: false});
+
+				for(var i=0;i<20000;i++){
+					var vertex = new THREE.Vector3();
+					vertex.x = Math.sin(Math.PI/180*i)*(550-i/80);
+					vertex.y = Math.random()*20;
+					vertex.z = Math.cos(Math.PI/180*i)*(550-i/80);
+					ring_saturn_geom.vertices.push(vertex);
+				}
+
+				ring = new THREE.Points(ring_saturn_geom,ring_saturn_mat);
+				ring.castShadow = true;
+				scene.add(ring); // 0 0 0
+
+
+
+				loader.load( 'img/uranusmap.jpg', function (uranus_texture) {
+
+					// Neptune
+					var uranus_geom, uranus_mat;
+					uranus_geom = new THREE.SphereGeometry(170,40,40);
+
+					//var saturn_texture = THREE.TextureLoader().load('img/saturnmap.jpg')
+
+					uranus_mat = new THREE.MeshBasicMaterial( {map: uranus_texture});
+					uranus = new THREE.Mesh(uranus_geom, uranus_mat);
+					scene.add(uranus);
+
+				} );
+
+				loader.load( 'img/neptunemap.jpg', function (neptune_texture) {
+
+					// Neptune
+					var neptune_geom, neptune_mat;
+					neptune_geom = new THREE.SphereGeometry(160,40,40);
+
+					//var saturn_texture = THREE.TextureLoader().load('img/saturnmap.jpg')
+
+					neptune_mat = new THREE.MeshBasicMaterial( {map: neptune_texture});
+					neptune = new THREE.Mesh(neptune_geom, neptune_mat);
+					scene.add(neptune);
 
 				} );
 
@@ -199,10 +290,10 @@
 
 				// Stars
 				var starsGeometry = new THREE.Geometry();
-				var starsMaterial = new THREE.PointsMaterial({color:0xbbbbbb,opacity:0.6,size:1,sizeAttenuation:false});
+				var starsMaterial = new THREE.PointsMaterial({color:0xbbbbbb,opacity:0.5,size:1,sizeAttenuation:false});
 				var stars;
 
-				for(var i=0; i<45000; i++) {
+				for(var i=0; i<3000; i++) {
 					var vertex = new THREE.Vector3();
 					vertex.x = Math.random()*2-1;
 					vertex.y = Math.random()*2-1;
@@ -212,14 +303,14 @@
 				}
 
 				stars = new THREE.Points(starsGeometry,starsMaterial);
-				stars.scale.set(50,50,50);
+				stars.scale.set(50,50,-50);
 				scene.add(stars);
 
 				var starsGeometry2 = new THREE.Geometry();
-				var starsMaterial2 = new THREE.PointsMaterial({color:0xbbbbb,opacity:0.6,size:1,sizeAttenuation:false});
+				var starsMaterial2 = new THREE.PointsMaterial({color:0xbbbbb,opacity:0.8,size:1,sizeAttenuation:false});
 				var stars2;
 
-				for(var i=0; i<10000; i++) {
+				for(var i=0; i<3000; i++) {
 					var vertex = new THREE.Vector3();
 					vertex.x = Math.random()*2-1;
 					vertex.y = Math.random()*2-1;
@@ -229,13 +320,34 @@
 				}
 
 				stars2 = new THREE.Points(starsGeometry2,starsMaterial2);
-				stars2.scale.set(70,150,100);
+				stars2.scale.set(70,150,-100);
 				scene.add(stars2);
 
 				// Ambient
-				var ambient = new THREE.AmbientLight(0xbbbbb);
+				var ambient = new THREE.AmbientLight(0x222222);
 				scene.add(ambient);
 
+				// Orbits for all planets
+				var mercury_orbit = new Orbit(8000);
+				mercury_orbit.draw(scene);
+
+				var venus_orbit = new Orbit(17000);
+				venus_orbit.draw(scene);
+
+				var mars_orbit = new Orbit(50000);
+				mars_orbit.draw(scene);
+
+				var jupiter_orbit = new Orbit(74000);
+				jupiter_orbit.draw(scene);
+
+				var saturn_orbit = new Orbit(98000);
+				saturn_orbit.draw(scene);
+
+				var uranus_orbit = new Orbit(120000);
+				uranus_orbit.draw(scene);
+
+				var neptune_orbit = new Orbit(180000);
+				neptune_orbit.draw(scene);
 
 
 				// Renderer
@@ -278,35 +390,53 @@
 
 				requestAnimationFrame(animate);
 
-				sun.rotation.y += 0.005;
+				sun.rotation.y += 0.001;
 
-				mercury.rotation.y -= 0.01;
-				mercury.position.x = Math.sin(t*0.3)*5000;
-				mercury.position.z = Math.cos(t*0.3)*5000;
+				controls.update(0.01);
 
-				venus.rotation.y -= 0.01;
-				venus.position.x = Math.sin(t*0.2)*5500;
-				venus.position.z = Math.cos(t*0.2)*5500;
+				
+				mercury.position.x = Math.sin(t*0.3)*8000;
+				mercury.position.z = Math.cos(t*0.3)*8000;
 
-				earth.rotation.y -= 0.01;
-				earth.position.x = Math.sin(t*0.1)*7500;
-				earth.position.z = Math.cos(t*0.1)*7500;
+				
+				venus.position.x = Math.sin(t*0.2)*17000;
+				venus.position.z = Math.cos(t*0.2)*17000;
 
-				mars.rotation.y -= 0.01;
-				mars.position.x = Math.sin(t*0.08)*8000;
-				mars.position.z = Math.cos(t*0.08)*8000;
+				earth.position.x = Math.sin(t*0.1)*30000;
+				earth.position.z = Math.cos(t*0.1)*30000;
 
-				jupiter.rotation.y -= 0.01;
-				jupiter.position.x = Math.sin(t*0.08)*10700;
-				jupiter.position.z = Math.cos(t*0.08)*10700;
+				mars.position.x = Math.sin(t*0.08)*50000;
+				mars.position.z = Math.cos(t*0.08)*50000;
+				
+				jupiter.position.x = Math.sin(t*0.06)*(-74000);
+				jupiter.position.z = Math.cos(t*0.06)*(-74000);
 
-				saturn.rotation.y -= 0.01;
-				saturn.position.x = Math.sin(t*0.08)*12000;
-				saturn.position.z = Math.cos(t*0.08)*12000;
+				saturn.position.x = Math.sin(t*0.04)*98000;
+				saturn.position.z = Math.cos(t*0.04)*98000;
+
+				ring.position.x = saturn.position.x;
+				ring.position.z = saturn.position.z;
+				ring.rotation.y -= 0.001; //use oposite
+
+				uranus.position.x = Math.sin(t*0.02)*120000;
+				uranus.position.z = Math.cos(t*0.02)*120000;
+
+				neptune.position.x = Math.sin(t*0.01)*180000;
+				neptune.position.z = Math.cos(t*0.01)*180000;				
 
 				// camera.position.z = earth.position.z + 100;
 				// camera.position.x = earth.position.x + 100;
 				// camera.lookAt(earth.position);
+
+				mercury.rotation.y -= 0.01;
+				venus.rotation.y -= 0.01;
+				earth.rotation.y -= 0.01;
+				mars.rotation.y -= 0.01;
+				jupiter.rotation.y -= 0.01;
+				saturn.rotation.y -= 0.01;
+
+				neptune.rotation.y -= 0.01;
+				uranus.rotation.y -= 0.01
 
 				t += Math.PI/180*2;
 
@@ -318,17 +448,20 @@
 				// camera.lookAt(scene.position);
 
 				// render.render(scene,camera);
-
-				controls.update();
-
-
+				// if(camera.position.z>mercury.position.z-100){
+				// 	camera.position.z-=80;
+				// 	camera.lookAt(mercury.position);	
+				// }
+				// if(camera.position.x<mercury.position.x-300){
+				// 	camera.position.x+=30;	
+				// }
 
 				renderer.render(scene, camera);
 			}
 
 			function render () {
 				
-				renderer.render(scene, camera);
+				//renderer.render(scene, camera);
 				stats.update();
 				console.log("Render Function");
 			}
@@ -338,6 +471,13 @@
 				//target = earth;
 				console.log("Earth Zoom");
 				
+			}
+
+			function freeCamera() {
+
+				console.log("Free Camera");
+
+
 			}
 
 		</script>
